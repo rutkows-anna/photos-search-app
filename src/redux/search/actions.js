@@ -4,6 +4,7 @@ import {
   SET_SUGGESTIONS,
   SET_PHOTOS,
 } from "./actionTypes";
+import request from "../../helpers/request";
 
 export const setQuery = (query) => ({
   type: SET_QUERY,
@@ -30,9 +31,9 @@ export const fetchSuggestions = (query) => (dispatch) => {
 };
 
 export const fetchPhotos = (query) => (dispatch) => {
-  axios
+  request
     .get(
-      `https://api.unsplash.com/search/photos?page=1&client_id=ubqRtUaT97rSSpHD6ZbHsX96g1STBeZlKA_qMF4wn-c&query=${query}`
+      `/search/photos?query=${query}`
     )
     .then(function (response) {
       dispatch(setPhotos(response.data.results));

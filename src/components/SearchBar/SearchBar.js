@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setQuery, fetchSuggestions } from "../../redux/search/actions";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
   const query = useSelector((state) => state.search.query);
   const suggestions = useSelector((state) => state.search.suggestions);
+  let history = useHistory();
 
   useEffect(() => {
     if (query.length > 2) {
@@ -14,28 +15,41 @@ const SearchBar = () => {
     }
   }, [dispatch, query]);
 
-  const handleChange = (event) => {
+  const handleOnChange = (event) => {
     dispatch(setQuery(event.target.value));
   };
 
+  const handleOnKeypress = (event) => {
+    if (event.key === "Enter") {
+     history.push(`/${query}`)}
+  }
+
   return (
-    <div>
-      <input type="text" value={query} onChange={handleChange} />
-      <div>
-        {query.length > 2 &&
-          (suggestions.length > 0 ? (
-            suggestions.map((item) => {
-              return (
-                <Link key={item.priority} to={`/${item.query}`}>
-                  {item.query}
-                </Link>
-              );
-            })
-          ) : (
-            <h1>No autocomplete sugest.</h1>
-          ))}
-      </div>
-    </div>
+    <form className="form">
+      <input
+        type="text"
+        required
+        placeholder="Search free high-resolution photos"
+        value={query}
+        onChange={handleOnChange}
+        onKeyPress={handleOnKeypress}
+        className="form__input"
+      />
+<ul className="list">
+      {query.length > 2 &&
+        (suggestions.length > 0 ? (
+          suggestions.map((item) => {
+            return (
+              <li key={item.priority} className="list__item"><Link to={`/${item.query}`}>
+                {item.query}
+              </Link></li>
+            );
+          })
+        ) : (
+          <li className="list__item">No autocomplete suggestions.</li>
+        ))}
+        </ul>
+    </form>
   );
 };
 

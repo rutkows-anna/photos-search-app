@@ -1,9 +1,9 @@
-import axios from "axios";
 import {
   SET_PHOTO,
   SHOW_MODAL,
   HIDE_MODAL,
 } from "./actionTypes";
+import request from "../../helpers/request";
 
 export const setPhoto = (photo) => ({
     type: SET_PHOTO,
@@ -19,9 +19,8 @@ export const setPhoto = (photo) => ({
 
   export const fetchPhoto = (photoId) => (dispatch) => {
     console.log(photoId)
-    axios
-      .get(
-        `https://api.unsplash.com/photos/${photoId}?client_id=ubqRtUaT97rSSpHD6ZbHsX96g1STBeZlKA_qMF4wn-c`
+    request
+      .get(`/photos/${photoId}`
       )
       .then(function (response) {
         dispatch(setPhoto(response.data));

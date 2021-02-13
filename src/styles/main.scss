@@ -1,3 +1,10 @@
+@import 'node_modules/normalize-scss/sass/normalize';
+@include normalize();
+
 @import "variables";
 @import "global";
 @import "mixins";
+
+@import "../App.scss";
+@import "../components/MainPage/MainPage.scss";
+@import "../components/SearchBar/SearchBar.scss";

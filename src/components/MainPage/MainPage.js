@@ -2,9 +2,13 @@ import SearchBar from "../SearchBar/SearchBar";
 
 const MainPage = () => {
   return (
-    <div>
-      <h1>Main page</h1>
+    <div className="mainpage-wrapper"> 
+    <div className="mainpage-content">
+      <h1 className="mainpage-content__title">Unsplash</h1>
+      <p className="mainpage-content__text">The internet’s source of freely-usable images.</p>
+      <p className="mainpage-content__text"> Powered by creators everywhere.</p>
       <SearchBar />
+    </div>
     </div>
   );
 };
