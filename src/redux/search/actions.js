@@ -1,5 +1,9 @@
 import axios from "axios";
-import { SET_QUERY, SET_SUGGESTIONS, SET_PHOTOS } from "./actionTypes";
+import {
+  SET_QUERY,
+  SET_SUGGESTIONS,
+  SET_PHOTOS,
+} from "./actionTypes";
 
 export const setQuery = (query) => ({
   type: SET_QUERY,

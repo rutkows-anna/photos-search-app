@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setQuery, fetchSuggestions } from "../../redux/actions";
+import { setQuery, fetchSuggestions } from "../../redux/search/actions";
 import { Link } from "react-router-dom";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
-  const query = useSelector((state) => state.query);
-  const suggestions = useSelector((state) => state.suggestions);
+  const query = useSelector((state) => state.search.query);
+  const suggestions = useSelector((state) => state.search.suggestions);
 
   useEffect(() => {
     if (query.length > 2) {

@@ -6,7 +6,7 @@ const initialState = {
   photos: [],
 };
 
-export const reducer = (state = initialState, action) => {
+export const searchReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.SET_QUERY:
       return {
@@ -18,7 +18,7 @@ export const reducer = (state = initialState, action) => {
         ...state,
         suggestions: action.payload,
       };
-      case actions.SET_PHOTOS:
+    case actions.SET_PHOTOS:
       return {
         ...state,
         photos: action.payload,
@@ -28,4 +28,4 @@ export const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+export default searchReducer;
