@@ -2,6 +2,8 @@ import * as actions from "./actionTypes";
 
 const initialState = {
   photo: {},
+  loading: false,
+  error: false,
   show: false,
   photoId: "",
 };
@@ -11,7 +13,19 @@ export const modalReducer = (state = initialState, action) => {
     case actions.SET_PHOTO:
       return {
         ...state,
+        loading: false,
         photo: action.payload,
+      };
+    case actions.SET_PHOTO_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case actions.SET_PHOTO_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: true,
       };
     case actions.SHOW_MODAL:
       return {

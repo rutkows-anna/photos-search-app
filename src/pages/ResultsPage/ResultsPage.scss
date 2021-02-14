@@ -1,0 +1,13 @@
+.results-page-wrapper {
+  padding: 20px;
+  width: 100%;
+  max-width: 1320px;
+  height: 100%;
+  @include flex(column, center, center);
+  &__title {
+    align-self: flex-start;
+    font-size: 4.6rem;
+    line-height: 1.2;
+    text-transform: capitalize;
+  }
+}

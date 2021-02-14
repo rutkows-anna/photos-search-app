@@ -4,6 +4,8 @@ const initialState = {
   query: "",
   suggestions: [],
   photos: [],
+  loading: false,
+  error: false,
 };
 
 export const searchReducer = (state = initialState, action) => {
@@ -21,7 +23,25 @@ export const searchReducer = (state = initialState, action) => {
     case actions.SET_PHOTOS:
       return {
         ...state,
+        loading: false,
         photos: action.payload,
+      };
+    case actions.SET_PHOTOS_LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
+    case actions.SET_PHOTOS_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
+    case actions.SET_CLEAR:
+      return {
+        ...state,
+        query: "",
+        suggestions: [],
       };
     default:
       return state;

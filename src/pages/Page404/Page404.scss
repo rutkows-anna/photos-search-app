@@ -1,0 +1,8 @@
+.page404-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    @include flex(column, center, center);
+&__title {
+    font-size: 3.0rem;
+}
+}

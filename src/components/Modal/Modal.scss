@@ -1,0 +1,70 @@
+.modal {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00000052;
+}
+.modal-container {
+  z-index: 10;
+  position: relative;
+  width: 95vw;
+  height: 95vh;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  // max-width: 500px;
+  //max-height: 500px;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: $primary-shadow;
+  background-color: $primary-color;
+  @include flex(column, flex-start, center);
+
+  &__button {
+    align-self: flex-end;
+    border: none;
+    background-color: transparent;
+    color: $secondary-color;
+    font-size: 3rem;
+    &:hover {
+      color: $third-color;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
+}
+.modal-content {
+  padding: 0 10px;
+  width: 100%;
+  height: 90%;
+  @include flex(column, space-between, flex-start);
+  &__photo {
+    position: relative;
+    align-self: center;
+    max-height: 90%;
+    max-width: 80%;
+    @include mediaQuery(m) {
+      max-height: 70%;
+    }
+  }
+  &__location {
+    padding: 5px 0;
+    // align-self: flex-start;
+    font-size: 1.5rem;
+  }
+}
+.author-info {
+  padding: 5px 0;
+  @include flex(row, space-between, center);
+  &__photo {
+    border-radius: 50%;
+  }
+  &__name {
+    margin-left: 5px;
+    font-size: 1.5rem;
+  }
+}

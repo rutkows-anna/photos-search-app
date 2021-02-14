@@ -1,19 +1,16 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import MainPage from "./components/MainPage/MainPage";
-import ResultsPage from "./components/ResultsPage/ResultsPage";
-import Modal from "./components/Modal/Modal";
-import { useSelector } from "react-redux";
+import MainPage from "./pages/MainPage/MainPage";
+import ResultsPage from "./pages/ResultsPage/ResultsPage";
+import Page404 from "./pages/Page404/Page404";
 
 function App() {
-  const show = useSelector((state) => state.modal.show);
   return (
-
-     <div className="app">
-        { show && <Modal /> }
+    <div className="app">
       <Router>
         <Switch>
           <Route exact path="/" component={MainPage} />
-          <Route path="/:query" component={ResultsPage} />
+          <Route exact path="/:query" component={ResultsPage} />
+          <Route component={Page404} />
         </Switch>
       </Router>
     </div>

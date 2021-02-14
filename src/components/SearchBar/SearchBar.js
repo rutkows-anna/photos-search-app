@@ -1,7 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setQuery, fetchSuggestions } from "../../redux/search/actions";
-import { Link, useHistory } from "react-router-dom";
+import {
+  setQuery,
+  fetchSuggestions,
+  setClear,
+} from "../../redux/search/actions";
+import { useHistory } from "react-router-dom";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
@@ -19,10 +23,18 @@ const SearchBar = () => {
     dispatch(setQuery(event.target.value));
   };
 
+  const handleResults = (query) => {
+    history.push(`/${query}`);
+    dispatch(setClear());
+  };
   const handleOnKeypress = (event) => {
     if (event.key === "Enter") {
-     history.push(`/${query}`)}
-  }
+      event.preventDefault();
+      handleResults(query);
+    } else {
+      return false;
+    }
+  };
 
   return (
     <form className="form">
@@ -35,20 +47,24 @@ const SearchBar = () => {
         onKeyPress={handleOnKeypress}
         className="form__input"
       />
-<ul className="list">
-      {query.length > 2 &&
-        (suggestions.length > 0 ? (
-          suggestions.map((item) => {
-            return (
-              <li key={item.priority} className="list__item"><Link to={`/${item.query}`}>
-                {item.query}
-              </Link></li>
-            );
-          })
-        ) : (
-          <li className="list__item">No autocomplete suggestions.</li>
-        ))}
-        </ul>
+      <ul className="list">
+        {query.length > 2 &&
+          (suggestions.length > 0 ? (
+            suggestions.map((item) => {
+              return (
+                <li
+                  key={item.priority}
+                  onClick={() => handleResults(item.query)}
+                  className="list__item"
+                >
+                  {item.query}
+                </li>
+              );
+            })
+          ) : (
+            <li className="list__item">No autocomplete suggestions.</li>
+          ))}
+      </ul>
     </form>
   );
 };

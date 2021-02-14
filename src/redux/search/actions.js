@@ -3,6 +3,9 @@ import {
   SET_QUERY,
   SET_SUGGESTIONS,
   SET_PHOTOS,
+  SET_PHOTOS_LOADING,
+  SET_PHOTOS_ERROR,
+  SET_CLEAR,
 } from "./actionTypes";
 import request from "../../helpers/request";
 
@@ -18,28 +21,34 @@ export const setPhotos = (photos) => ({
   type: SET_PHOTOS,
   payload: photos,
 });
-
+export const setLoading = () => ({
+  type: SET_PHOTOS_LOADING,
+});
+export const setClear = () => ({
+  type: SET_CLEAR,
+});
+export const setError = () => ({
+  type: SET_PHOTOS_ERROR,
+});
 export const fetchSuggestions = (query) => (dispatch) => {
   axios
     .get(`/nautocomplete/${query}`)
-    .then(function (response) {
+    .then((response) => {
       dispatch(setSuggestions(response.data.autocomplete));
     })
-    .catch(function (error) {
+    .catch((error) => {
       console.log(error);
     });
 };
 
 export const fetchPhotos = (query) => (dispatch) => {
+  dispatch(setLoading());
   request
-    .get(
-      `/search/photos?query=${query}`
-    )
-    .then(function (response) {
+    .get(`/search/photos?query=${query}`)
+    .then((response) => {
       dispatch(setPhotos(response.data.results));
-      console.log(response.data.results);
     })
-    .catch(function (error) {
-      console.log(error);
+    .catch((error) => {
+      dispatch(setError());
     });
 };
